@@ -28,36 +28,36 @@ func TestFizzBuzz(t *testing.T) {
 
 	// test cases
 	tests := [...]struct {
-		rule   container
+		rules  rulesetArray
 		length int
 		check  checkFunc
 	}{
 		//tests function signature
-		{container{}, 0, isEmptyList},
+		{rulesetArray{}, 0, isEmptyList},
 		//tests ability to apply a rule
-		{container{1: "fizz"}, 1, isDeepEqual(outputList{"fizz"})},
+		{rulesetArray{{Place: 1, Rule: "fizz"}}, 1, isDeepEqual(outputList{"fizz"})},
 		//tests ability to run with arbitrary length without rules
-		{container{}, 3, isDeepEqual(outputList{"1", "2", "3"})},
+		{rulesetArray{}, 3, isDeepEqual(outputList{"1", "2", "3"})},
 		//tests ability to apply rule with arbitrary length
-		{container{3: "fizz"}, 3, isDeepEqual(outputList{"1", "2", "fizz"})},
+		{rulesetArray{{Place: 3, Rule: "fizz"}}, 3, isDeepEqual(outputList{"1", "2", "fizz"})},
 		//tests ability to apply multiple rules
-		{container{2: "fizz", 3: "buzz"}, 3, isDeepEqual(outputList{"1", "fizz", "buzz"})},
+		{rulesetArray{{Place: 2, Rule: "fizz"}, {Place: 3, Rule: "buzz"}}, 3, isDeepEqual(outputList{"1", "fizz", "buzz"})},
 		//tests ability to apply multiple rules in reverse
-		{container{3: "fizz", 2: "buzz"}, 3, isDeepEqual(outputList{"1", "buzz", "fizz"})},
+		{rulesetArray{{Place: 3, Rule: "fizz"}, {Place: 2, Rule: "buzz"}}, 3, isDeepEqual(outputList{"1", "buzz", "fizz"})},
 		//tests ability to apply overlapping rules
-		{container{2: "fizz", 3: "buzz"}, 6, isDeepEqual(outputList{"1", "fizz", "buzz", "fizz", "5", "fizzbuzz"})},
+		{rulesetArray{{Place: 2, Rule: "fizz"}, {Place: 3, Rule: "buzz"}}, 6, isDeepEqual(outputList{"1", "fizz", "buzz", "fizz", "5", "fizzbuzz"})},
 		//tests ability to apply overlapping rules in reverse order
-		{container{3: "fizz", 2: "buzz"}, 6, isDeepEqual(outputList{"1", "buzz", "fizz", "buzz", "5", "buzzfizz"})},
+		{rulesetArray{{Place: 3, Rule: "fizz"}, {Place: 2, Rule: "buzz"}}, 6, isDeepEqual(outputList{"1", "buzz", "fizz", "buzz", "5", "buzzfizz"})},
 		//tests ability to apply arbitrary number of rules
-		{container{1: "fizz", 2: "buzz", 3: "foo"}, 3, isDeepEqual(outputList{"fizz", "fizzbuzz", "fizzfoo"})},
+		{rulesetArray{{Place: 1, Rule: "fizz"}, {Place: 2, Rule: "buzz"}, {Place: 3, Rule: "foo"}}, 3, isDeepEqual(outputList{"fizz", "fizzbuzz", "fizzfoo"})},
 		//tests ability to apply arbitrary number of rules in reverse order
-		{container{1: "fizz", 3: "buzz", 2: "foo"}, 3, isDeepEqual(outputList{"fizz", "fizzfoo", "fizzbuzz"})},
+		{rulesetArray{{Place: 1, Rule: "fizz"}, {Place: 3, Rule: "buzz"}, {Place: 2, Rule: "foo"}}, 3, isDeepEqual(outputList{"fizz", "fizzfoo", "fizzbuzz"})},
 	}
 
 	//execute tests
 	for _, tc := range tests {
-		t.Run(fmt.Sprintf("Fizzbuzz of (%v,%v)", tc.rule, tc.length), func(t *testing.T) {
-			output := FizzBuzz(tc.rule, tc.length)
+		t.Run(fmt.Sprintf("Fizzbuzz of (%v,%v)", tc.rules, tc.length), func(t *testing.T) {
+			output := FizzBuzz(tc.rules, tc.length)
 			if err := tc.check(output); err != nil {
 				t.Error(err)
 			}
