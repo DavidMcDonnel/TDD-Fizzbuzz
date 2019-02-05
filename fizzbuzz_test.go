@@ -32,13 +32,26 @@ func TestFizzBuzz(t *testing.T) {
 		length int
 		check  checkFunc
 	}{
+		//tests function signature
 		{container{}, 0, isEmptyList},
+		//tests ability to apply a rule
 		{container{1: "fizz"}, 1, isDeepEqual(outputList{"fizz"})},
+		//tests ability to run with arbitrary length without rules
+		{container{}, 3, isDeepEqual(outputList{"1", "2", "3"})},
+		//tests ability to apply rule with arbitrary length
 		{container{3: "fizz"}, 3, isDeepEqual(outputList{"1", "2", "fizz"})},
+		//tests ability to apply multiple rules
 		{container{2: "fizz", 3: "buzz"}, 3, isDeepEqual(outputList{"1", "fizz", "buzz"})},
+		//tests ability to apply multiple rules in reverse
 		{container{3: "fizz", 2: "buzz"}, 3, isDeepEqual(outputList{"1", "buzz", "fizz"})},
+		//tests ability to apply overlapping rules
 		{container{2: "fizz", 3: "buzz"}, 6, isDeepEqual(outputList{"1", "fizz", "buzz", "fizz", "5", "fizzbuzz"})},
+		//tests ability to apply overlapping rules in reverse order
 		{container{3: "fizz", 2: "buzz"}, 6, isDeepEqual(outputList{"1", "buzz", "fizz", "buzz", "5", "buzzfizz"})},
+		//tests ability to apply arbitrary number of rules
+		{container{1: "fizz", 2: "buzz", 3: "foo"}, 3, isDeepEqual(outputList{"fizz", "fizzbuzz", "fizzfoo"})},
+		//tests ability to apply arbitrary number of rules in reverse order
+		{container{1: "fizz", 3: "buzz", 2: "foo"}, 3, isDeepEqual(outputList{"fizz", "fizzfoo", "fizzbuzz"})},
 	}
 
 	//execute tests

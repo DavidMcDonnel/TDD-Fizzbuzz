@@ -13,9 +13,6 @@ type outputList []string
 // applies them to the provided integer range denoted by length,
 // and outputs a list of strings
 func FizzBuzz(c container, length int) (output outputList) {
-	if len(c) == 0 {
-		return nil
-	}
 	keys := make([]int, 0, len(c))
 	for key := range c {
 		keys = append(keys, key)
