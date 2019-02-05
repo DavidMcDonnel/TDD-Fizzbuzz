@@ -17,8 +17,7 @@ func FizzBuzz(c container, length int) (output outputList) {
 		var result string
 		for place, rule := range c {
 			if i%place == 0 {
-				result = rule
-				break
+				result += rule
 			}
 		}
 		if result == "" {
