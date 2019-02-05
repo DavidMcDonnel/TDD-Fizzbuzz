@@ -1,6 +1,9 @@
 package main
 
-import "strconv"
+import (
+	"sort"
+	"strconv"
+)
 
 type container map[int]string
 type outputList []string
@@ -13,11 +16,16 @@ func FizzBuzz(c container, length int) (output outputList) {
 	if len(c) == 0 {
 		return nil
 	}
+	keys := make([]int, 0, len(c))
+	for key := range c {
+		keys = append(keys, key)
+	}
+	sort.Ints(keys)
 	for i := 1; i < length+1; i++ {
 		var result string
-		for place, rule := range c {
+		for _, place := range keys {
 			if i%place == 0 {
-				result += rule
+				result += c[place]
 			}
 		}
 		if result == "" {
