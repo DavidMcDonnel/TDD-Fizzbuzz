@@ -28,30 +28,30 @@ func TestFizzBuzz(t *testing.T) {
 
 	// test cases
 	tests := [...]struct {
-		rules  rulesetArray
+		rules  ruleArray
 		length int
 		check  checkFunc
 	}{
 		//tests function signature
-		{rulesetArray{}, 0, isEmptyList},
+		{ruleArray{}, 0, isEmptyList},
 		//tests ability to apply a rule
-		{rulesetArray{{Place: 1, Rule: "fizz"}}, 1, isDeepEqual(outputList{"fizz"})},
+		{ruleArray{{Place: 1, Rule: "fizz"}}, 1, isDeepEqual(outputList{"fizz"})},
 		//tests ability to run with arbitrary length without rules
-		{rulesetArray{}, 3, isDeepEqual(outputList{"1", "2", "3"})},
+		{ruleArray{}, 3, isDeepEqual(outputList{"1", "2", "3"})},
 		//tests ability to apply rule with arbitrary length
-		{rulesetArray{{Place: 3, Rule: "fizz"}}, 3, isDeepEqual(outputList{"1", "2", "fizz"})},
+		{ruleArray{{Place: 3, Rule: "fizz"}}, 3, isDeepEqual(outputList{"1", "2", "fizz"})},
 		//tests ability to apply multiple rules
-		{rulesetArray{{Place: 2, Rule: "fizz"}, {Place: 3, Rule: "buzz"}}, 3, isDeepEqual(outputList{"1", "fizz", "buzz"})},
+		{ruleArray{{Place: 2, Rule: "fizz"}, {Place: 3, Rule: "buzz"}}, 3, isDeepEqual(outputList{"1", "fizz", "buzz"})},
 		//tests ability to apply multiple rules in reverse
-		{rulesetArray{{Place: 3, Rule: "fizz"}, {Place: 2, Rule: "buzz"}}, 3, isDeepEqual(outputList{"1", "buzz", "fizz"})},
+		{ruleArray{{Place: 3, Rule: "fizz"}, {Place: 2, Rule: "buzz"}}, 3, isDeepEqual(outputList{"1", "buzz", "fizz"})},
 		//tests ability to apply overlapping rules
-		{rulesetArray{{Place: 2, Rule: "fizz"}, {Place: 3, Rule: "buzz"}}, 6, isDeepEqual(outputList{"1", "fizz", "buzz", "fizz", "5", "fizzbuzz"})},
+		{ruleArray{{Place: 2, Rule: "fizz"}, {Place: 3, Rule: "buzz"}}, 6, isDeepEqual(outputList{"1", "fizz", "buzz", "fizz", "5", "fizzbuzz"})},
 		//tests ability to apply overlapping rules in reverse order
-		{rulesetArray{{Place: 3, Rule: "fizz"}, {Place: 2, Rule: "buzz"}}, 6, isDeepEqual(outputList{"1", "buzz", "fizz", "buzz", "5", "buzzfizz"})},
+		{ruleArray{{Place: 3, Rule: "fizz"}, {Place: 2, Rule: "buzz"}}, 6, isDeepEqual(outputList{"1", "buzz", "fizz", "buzz", "5", "buzzfizz"})},
 		//tests ability to apply arbitrary number of rules
-		{rulesetArray{{Place: 1, Rule: "fizz"}, {Place: 2, Rule: "buzz"}, {Place: 3, Rule: "foo"}}, 3, isDeepEqual(outputList{"fizz", "fizzbuzz", "fizzfoo"})},
+		{ruleArray{{Place: 1, Rule: "fizz"}, {Place: 2, Rule: "buzz"}, {Place: 3, Rule: "foo"}}, 3, isDeepEqual(outputList{"fizz", "fizzbuzz", "fizzfoo"})},
 		//tests ability to apply arbitrary number of rules in reverse order
-		{rulesetArray{{Place: 1, Rule: "fizz"}, {Place: 3, Rule: "buzz"}, {Place: 2, Rule: "foo"}}, 3, isDeepEqual(outputList{"fizz", "fizzfoo", "fizzbuzz"})},
+		{ruleArray{{Place: 1, Rule: "fizz"}, {Place: 3, Rule: "buzz"}, {Place: 2, Rule: "foo"}}, 3, isDeepEqual(outputList{"fizz", "fizzfoo", "fizzbuzz"})},
 	}
 
 	//execute tests
