@@ -13,14 +13,16 @@ func FizzBuzz(c container, length int) (output outputList) {
 	if len(c) == 0 {
 		return nil
 	}
-	var result string
 	for i := 1; i < length+1; i++ {
+		var result string
 		for place, rule := range c {
 			if i%place == 0 {
 				result = rule
-			} else {
-				result = strconv.Itoa(i)
+				break
 			}
+		}
+		if result == "" {
+			result = strconv.Itoa(i)
 		}
 		output = append(output, result)
 	}
