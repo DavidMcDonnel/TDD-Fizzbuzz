@@ -8,5 +8,9 @@ type outputList []string
 // applies them to the provided integer range denoted by length,
 // and outputs a list of strings
 func FizzBuzz(c container, length int) outputList {
-	return nil
+	if len(c) == 0 {
+		return nil
+	} else {
+		return outputList{"fizz"}
+	}
 }

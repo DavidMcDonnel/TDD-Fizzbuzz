@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"reflect"
 	"testing"
 )
 
@@ -16,6 +17,15 @@ func TestFizzBuzz(t *testing.T) {
 		return nil
 	}
 
+	isDeepEqual := func(want outputList) func(outputList) error {
+		return func(have outputList) error {
+			if !reflect.DeepEqual(have, want) {
+				return fmt.Errorf("Expected equivalent list. Found %v, wanted %v", have, want)
+			}
+			return nil
+		}
+	}
+
 	// test cases
 	tests := [...]struct {
 		rule   container
@@ -23,6 +33,7 @@ func TestFizzBuzz(t *testing.T) {
 		check  checkFunc
 	}{
 		{container{}, 0, isEmptyList},
+		{container{1: "fizz"}, 1, isDeepEqual(outputList{"fizz"})},
 	}
 
 	//execute tests
