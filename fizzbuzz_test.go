@@ -34,6 +34,7 @@ func TestFizzBuzz(t *testing.T) {
 	}{
 		{container{}, 0, isEmptyList},
 		{container{1: "fizz"}, 1, isDeepEqual(outputList{"fizz"})},
+		{container{3: "fizz"}, 3, isDeepEqual(outputList{"1", "2", "fizz"})},
 	}
 
 	//execute tests
